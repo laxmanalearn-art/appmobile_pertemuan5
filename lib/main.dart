@@ -1,17 +1,20 @@
+import 'package:flutter/material.dart'; //1
+
 void main() {
-  runApp(MainApp());
+  runApp(const MainApp()); //2
 }
 
 class MainApp extends StatelessWidget {
-  MainApp({super.key});
+  const MainApp({super.key}); //3
 
   final String userName = 'I Ketut Gunawan, S.Kom, M.T.I.';
   final String role = 'Senior Backend Engineer & Dosen';
 
-  final List<String> experiences = [
+  final List<String> experiences = const [
+    //9
     'Senior Backend Engineer - EDC Bank DKI',
     'Backend & System Architect - Secure Payment EDC',
-    'Lead Developer - Aplikasi Sekurindo',
+    'Lead Developer - Aplikasi Sekurindo', //4
     'Backend Engineer - Pengembangan Sistem E-money',
   ];
 
@@ -34,21 +37,22 @@ class MainApp extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-
               const CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.grey,
                 child: Icon(Icons.person, size: 50, color: Colors.white),
               ),
 
-
-              const SizedBox(width: 16),
+              const SizedBox(height: 16), //5
 
               Column(
                 children: [
                   Text(
                     userName,
-                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
@@ -64,8 +68,12 @@ class MainApp extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Fitur edit belum aktif pada modul statis.'))
-                   );
+                    const SnackBar(
+                      content: Text(
+                        'Fitur edit belum aktif pada modul statis.',
+                      ),
+                    ),
+                  );
                 },
                 icon: const Icon(Icons.edit),
                 label: const Text('Edit Profil'),
@@ -83,12 +91,12 @@ class MainApp extends StatelessWidget {
                   children: [
                     const StatItem(count: '15', label: 'Proyek'),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(width: 24), //6
 
                     const StatItem(count: '1.2K', label: 'Followers'),
                     const SizedBox(width: 24),
 
-                    StatItem(count: 42, label: 'Following'),
+                    StatItem(count: '42', label: 'Following'), //7
                   ],
                 ),
               ),
@@ -102,25 +110,28 @@ class MainApp extends StatelessWidget {
                 ),
               ),
               const Divider(),
-
-              ListView.builder(
-                itemCount: experiences.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    elevation: 2,
-                    margin: const EdgeInsets.symmetric(vertical: 6),
-                    child: ListTile(
-                      leading: const Icon(Icons.work, color: Colors.blueAccent),
-                      title: Text(experiences[index]),
-                    ),
-                  );
-                }
+              Expanded(
+                child: ListView.builder(
+                  itemCount: experiences.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      elevation: 2,
+                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.work,
+                          color: Colors.blueAccent,
+                        ),
+                        title: Text(experiences[index]),
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),
         ),
       ),
-      );
     );
   }
 }
@@ -144,13 +155,7 @@ class StatItem extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 14,
-            color: Colors.grey[600],
-          ),
-        ),
+        Text(label, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
       ],
     );
   }
