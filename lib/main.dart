@@ -80,18 +80,22 @@ class MainApp extends StatelessWidget {
               const SizedBox(height: 24),
 
               // 3. Tombol edit profil
-              ElevatedButton.icon(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Fitur edit belum aktif pada modul statis.',
-                      ),
-                    ),
+              Builder(
+                builder: (context) {
+                  return ElevatedButton.icon(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Fitur edit belum aktif pada modul statis.',
+                          ),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.edit),
+                    label: const Text('Edit Profil'),
                   );
                 },
-                icon: const Icon(Icons.edit),
-                label: const Text('Edit Profil'),
               ),
 
               const SizedBox(height: 24),
@@ -107,8 +111,8 @@ class MainApp extends StatelessWidget {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    StatItem(count: '15', label: 'Proyek'),
-                    StatItem(count: '1.2K', label: 'Followers'),
+                    StatItem(count: '58', label: 'Proyek'),
+                    StatItem(count: '19jt', label: 'Lapangan kerja'),
                     StatItem(count: '42', label: 'Following'),
                   ],
                 ),
