@@ -1,202 +1,157 @@
-import 'package:flutter/material.dart';
-
 void main() {
-  runApp(const MaterialApp(home: LayoutRulesExample()));
+  runApp(MainApp());
 }
 
-class LayoutRulesExample extends StatelessWidget {
-  const LayoutRulesExample({super.key});
+class MainApp extends StatelessWidget {
+  MainApp({super.key});
+
+  final String userName = 'I Ketut Gunawan, S.Kom, M.T.I.';
+  final String role = 'Senior Backend Engineer & Dosen';
+
+  final List<String> experiences = [
+    'Senior Backend Engineer - EDC Bank DKI',
+    'Backend & System Architect - Secure Payment EDC',
+    'Lead Developer - Aplikasi Sekurindo',
+    'Backend Engineer - Pengembangan Sistem E-money',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Tiga Aturan Layout Flutter')),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            MyPages1(),
-            Divider(thickness: 2),
-            MyPages2(),
-            Divider(thickness: 2),
-            MyPages3(),
-          ],
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Aplikasi Profil',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
       ),
-    );
-  }
-}
-
-class MyPages1 extends StatelessWidget {
-  const MyPages1({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              '1 & 2. Aturan Constraints (Batas) dan Size (Ukuran)',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Induk memaksa anak berada di batas 100x100 hingga 200x200. Anak meminta ukuran 500x50, tapi dipaksa mengikuti batas induk (mentok di lebar 200, tinggi 100).',
-            ),
-            const SizedBox(height: 10),
-
-            // CONTOH ATURAN 1 & 2
-            ConstrainedBox(
-              // INDUK memberikan constraints ke bawah (Constraints turun)
-              constraints: const BoxConstraints(
-                minWidth: 100,
-                maxWidth: 200,
-                minHeight: 100,
-                maxHeight: 200,
-              ),
-              // ANAK mencoba menentukan ukuran (Ukuran naik)
-              child: Container(
-                width: 500, // Mencoba lebih besar dari maxWidth (Gagal, dipaksa 200)
-                height: 50, // Mencoba lebih kecil dari minHeight (Gagal, dipaksa 100)
-                color: Colors.blue,
-                child: const Text(
-                  'Saya minta 500x50, tapi dapatnya 200x100',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-          ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Profil Pengguna'),
+          centerTitle: true,
+          backgroundColor: Colors.blueAccent,
+          foregroundColor: Colors.white,
         ),
-      ),
-    );
-  }
-}
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
 
-class MyPages2 extends StatelessWidget {
-  const MyPages2({super.key});
+              const CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.grey,
+                child: Icon(Icons.person, size: 50, color: Colors.white),
+              ),
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // const Divider(height: 40, thickness: 2),
 
-            const Text(
-              '3. Aturan Posisi (dengan Center)',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Induk abu-abu berukuran 200x200. Kotak merah 80x80 tidak bisa menaruh dirinya di tengah, jadi kita gunakan widget Center.',
-            ),
-            const SizedBox(height: 10),
+              const SizedBox(width: 16),
 
-            // CONTOH ATURAN 3 (CENTER)
-            Container(
-              width: 200,
-              height: 200,
-              color: Colors.grey[300], // Induk yang memiliki ruang
-              // Induk yang menentukan posisi
-              child: Center(
-                child: Container(
-                  width: 80,
-                  height: 80,
-                  color: Colors.red,
-                  child: const Text(
-                    'Center',
-                    style: TextStyle(color: Colors.white),
+              Column(
+                children: [
+                  Text(
+                    userName,
+                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-              ),
-            ),
-
-            const Divider(height: 40, thickness: 2),
-
-            const Text(
-              '3. Aturan Posisi (dengan Align)',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Induk abu-abu berukuran 200x200. Kotak hijau 80x80 ditempatkan di pojok kanan bawah menggunakan widget Align.',
-            ),
-            const SizedBox(height: 10),
-
-            // CONTOH ATURAN 3 (ALIGN)
-            Container(
-              width: 200,
-              height: 200,
-              color: Colors.grey[300], // Induk yang memiliki ruang
-              // Induk yang menentukan posisi
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                  width: 80,
-                  height: 80,
-                  color: Colors.green,
-                  child: const Text(
-                    'Align',
-                    style: TextStyle(color: Colors.white),
+                  const SizedBox(height: 8),
+                  Text(
+                    role,
+                    style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                    textAlign: TextAlign.center,
                   ),
+                ],
+              ),
+              const SizedBox(height: 24),
+
+              ElevatedButton.icon(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Fitur edit belum aktif pada modul statis.'))
+                   );
+                },
+                icon: const Icon(Icons.edit),
+                label: const Text('Edit Profil'),
+              ),
+              const SizedBox(height: 24),
+
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(
+                  color: Colors.blue[50],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const StatItem(count: '15', label: 'Proyek'),
+
+                    const SizedBox(height: 24),
+
+                    const StatItem(count: '1.2K', label: 'Followers'),
+                    const SizedBox(width: 24),
+
+                    StatItem(count: 42, label: 'Following'),
+                  ],
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 24),
+
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Pengalaman Kerja',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+              const Divider(),
+
+              ListView.builder(
+                itemCount: experiences.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    elevation: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 6),
+                    child: ListTile(
+                      leading: const Icon(Icons.work, color: Colors.blueAccent),
+                      title: Text(experiences[index]),
+                    ),
+                  );
+                }
+              ),
+            ],
+          ),
         ),
       ),
+      );
     );
   }
 }
 
-class MyPages3 extends StatelessWidget {
-  const MyPages3({super.key});
+class StatItem extends StatelessWidget {
+  final String count;
+  final String label;
+
+  const StatItem({super.key, required this.count, required this.label});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Constraints go down" (Batasan turun)',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Ketika kita menghapus dengan gunakan  comment pada widget Center,  Container induk langsung meneruskan batasannya secara paksa kepada anaknya',
-            ),
-            const SizedBox(height: 10),
-
-            // CONTOH ATURAN 3 (ALIGN)
-            Container(
-              width: 200,
-              height: 200,
-              color: Colors.grey[300], // Induk yang memiliki ruang
-              // Induk yang menentukan posisi
-              //child: Center(
-              child: Container(
-                width: 80,
-                height: 80,
-                color: Colors.red,
-                child: const Text(
-                  'Center',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              //),
-            ),
-          ],
+    return Column(
+      children: [
+        Text(
+          count,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+          ),
         ),
-      ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[600],
+          ),
+        ),
+      ],
     );
   }
 }
