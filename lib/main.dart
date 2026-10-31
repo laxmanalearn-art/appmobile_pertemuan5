@@ -7,15 +7,17 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key}); //3
 
-  final String userName = 'I Ketut Gunawan, S.Kom, M.T.I.';
-  final String role = 'Senior Backend Engineer & Dosen';
+  final String userName = 'Bayu Laksmana';
+  final String role = 'Mahasiswa';
+  final String nim = '1124160070';
+  final String kelas = 'TI 24 SE SH';
 
   final List<String> experiences = const [
     //9
-    'Senior Backend Engineer - EDC Bank DKI',
-    'Backend & System Architect - Secure Payment EDC',
-    'Lead Developer - Aplikasi Sekurindo', //4
-    'Backend Engineer - Pengembangan Sistem E-money',
+    'FrontLiner/Crew Store - PT Niceso Sukses Indonesia',
+    'Werehouse Staff - PT Sagara Marjan Lestari',
+    'Production Operator - PT Paragon Technology Indonesia', //4
+    'College Student - Global Institute Technology and Business',
   ];
 
   @override
@@ -30,7 +32,7 @@ class MainApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Profil Pengguna'),
           centerTitle: true,
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: const Color.fromARGB(255, 100, 33, 243),
           foregroundColor: Colors.white,
         ),
         body: Padding(
@@ -58,6 +60,16 @@ class MainApp extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     role,
+                    style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    'NIM : ' + nim,
+                    style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    'Kelas : ' + kelas,
                     style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                     textAlign: TextAlign.center,
                   ),
